@@ -16,7 +16,7 @@ module BulletJournal
       }
     end
 
-    def mark_as_done
+    def mark_as_complete
       @complete = true
       to_h
     end

@@ -50,6 +50,17 @@ module BulletJournal
       today_file.write(YAML.dump(file))
     end
 
+    def self.complete_task(task_number)
+      file = YAML.load(today_file.read)
+
+      unless file[:tasks].nil?
+        unless file[:tasks][task_number].nil?
+          file[:tasks][task_number] = Task.new(file[:tasks][task_number].to_h).mark_as_complete
+          today_file.write(YAML.dump(file))
+        end
+      end
+    end
+
     def self.today_file
       t = Time.now
 

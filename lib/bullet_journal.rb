@@ -31,6 +31,13 @@ module BulletJournal
           BulletJournal::File.add_task(text)
         end
       end
+
+      subcommand "complete", "complete a task" do
+        parameter "TASK_NUMBER", "what the task is", required: true
+        def execute
+          BulletJournal::File.complete_task(task_number.to_i)
+        end
+      end
     end
   end
 end
