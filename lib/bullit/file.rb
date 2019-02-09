@@ -1,9 +1,8 @@
 require 'pathname'
 require 'yaml'
 require 'pry'
-require 'ap'
 
-require 'bullet_journal/task'
+require 'bullit/task'
 
 module BulletJournal
   class File
@@ -78,8 +77,11 @@ module BulletJournal
       week    = t.strftime "%W" 
       weekday = t.strftime("%u").to_i
 
+      # TODO: the logic here is a bit dodgy... it should look for the latest file in case you don't use your machine for more than one day.
       if weekday > 1
-        yesterday_file = Pathname("tasks/#{year}/#{week}/#{(weekday - 1).to_s}.md")
+        Pathname("tasks/#{year}/#{week}/#{(weekday - 1).to_s}.md")
+      else
+        Pathname("tasks/#{year}/#{week-1}/7.md")
       end
     end
   end

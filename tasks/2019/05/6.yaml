@@ -4,3 +4,12 @@
 - :text: Get cat food
   :complete: true
   :created_at: '2019-02-09 16:46:24 +0000'
+- :text: Finish this app
+  :complete: true
+  :created_at: '2019-02-09 17:03:43 +0000'
+- :text: Add colours to the terminal.
+  :complete: true
+  :created_at: '2019-02-09 19:20:57 +0000'
+- :text: Make sure the rename worked
+  :complete: true
+  :created_at: '2019-02-09 20:00:26 +0000'

@@ -1,10 +1,10 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "bullet_journal/version"
+require "bullit/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "bullet_journal"
+  spec.name          = "bullit"
   spec.version       = BulletJournal::VERSION
   spec.authors       = ["Tomek Nadolny"]
   spec.email         = ["tomek.nad@gmail.com"]
@@ -31,8 +31,8 @@ Gem::Specification.new do |spec|
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir        = "bin"
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.0"
@@ -41,5 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
 
   spec.add_dependency "clamp"
-  spec.add_dependency "awesome_print"
+  spec.add_dependency "tty-table"
+  spec.add_dependency "tty-prompt"
 end
