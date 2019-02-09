@@ -32,6 +32,7 @@ module BulletJournal
           prompt = TTY::Prompt.new
           text = prompt.ask('what do you need to do?') if text.nil?
           BulletJournal::File.add_task(text)
+          show_tasks
         end
       end
 
@@ -39,14 +40,19 @@ module BulletJournal
         parameter "TASK_NUMBER", "what the task is", required: true
         def execute
           BulletJournal::File.complete_task(task_number.to_i)
+          show_tasks
         end
       end
     end
 
     def show_tasks
-      tasks = BulletJournal::File.today_tasks.each_with_index.map{ |t,i| [i,t[:text], t[:complete] == true ? ' ✅' : ' ❌']}
+      if tasks = BulletJournal::File.today_tasks
+        tasks = tasks.each_with_index.map{ |t,i| [i,t[:text], t[:complete] == true ? ' ✅' : ' ❌']}
 
-      puts TTY::Table.new(['#', 'Task', ''], tasks).render(:ascii)
+        puts TTY::Table.new(['#', 'Task', ''], tasks).render(:unicode)
+      elsif tasks == {}
+        puts "There's no tasks for today"
+      end
     end
   end
 end
