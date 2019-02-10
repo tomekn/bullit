@@ -5,7 +5,7 @@ require "bullit/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "bullit"
-  spec.version       = BulletJournal::VERSION
+  spec.version       = Bullit::VERSION
   spec.authors       = ["Tomek Nadolny"]
   spec.email         = ["tomek.nad@gmail.com"]
 

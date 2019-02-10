@@ -1,4 +1,4 @@
-module BulletJournal
+module Bullit
   class Task
     attr_accessor :text, :complete
 
@@ -20,5 +20,11 @@ module BulletJournal
       @complete = true
       to_h
     end
+  end
+end
+
+class Hash
+  def to_task
+    Bullit::Task.new(self)
   end
 end

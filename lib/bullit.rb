@@ -5,7 +5,7 @@ require 'tty-prompt'
 require "bullit/version"
 require "bullit/file"
 
-module BulletJournal
+module Bullit
   class Error < StandardError; end
   
   Clamp do
@@ -14,7 +14,7 @@ module BulletJournal
     subcommand "generate", "generator functions" do
       subcommand "today", "creates task file for today" do
         def execute
-          BulletJournal::File.generate_today_file(loud?)
+          Bullit::File.generate_today_file(loud?)
         end
       end
     end
@@ -31,7 +31,15 @@ module BulletJournal
         def execute
           prompt = TTY::Prompt.new
           text = prompt.ask('what do you need to do?') if text.nil?
-          BulletJournal::File.add_task(text)
+          Bullit::File.add_task(text)
+          show_tasks
+        end
+      end
+      
+      subcommand "delete", "delete a task" do
+        parameter "TASK_NUMBER", "what the task is", required: true
+        def execute
+          Bullit::File.delete_task(task_number.to_i)
           show_tasks
         end
       end
@@ -39,14 +47,14 @@ module BulletJournal
       subcommand "complete", "complete a task" do
         parameter "TASK_NUMBER", "what the task is", required: true
         def execute
-          BulletJournal::File.complete_task(task_number.to_i)
+          Bullit::File.complete_task(task_number.to_i)
           show_tasks
         end
       end
     end
 
     def show_tasks
-      if tasks = BulletJournal::File.today_tasks
+      if tasks = Bullit::File.today_tasks
         tasks = tasks.each_with_index.map{ |t,i| [i,t[:text], t[:complete] == true ? ' ✅' : ' ❌']}
 
         puts TTY::Table.new(['#', 'Task', ''], tasks).render(:unicode)

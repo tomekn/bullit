@@ -1,6 +1,6 @@
-RSpec.describe BulletJournal do
+RSpec.describe Bullit do
   it "has a version number" do
-    expect(BulletJournal::VERSION).not_to be nil
+    expect(Bullit::VERSION).not_to be nil
   end
 
   it "does something useful" do

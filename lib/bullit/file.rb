@@ -5,7 +5,7 @@ require 'pry'
 
 require 'bullit/task'
 
-module BulletJournal
+module Bullit
   class File
     def self.generate_today_file(loud)
       today_file.dirname.mkpath unless today_file.dirname.exist?
@@ -28,7 +28,7 @@ module BulletJournal
 
     def self.incomplete_tasks_from_yesterday(loud)
       if yesterday_file.exist?
-        file = YAML.load(yesterday_file.read)
+        file = yesterday_file_contents
         
         return {} if file[:tasks].empty?
         
@@ -36,7 +36,7 @@ module BulletJournal
           unless t[:complete] == true
             action = TTY::Prompt.new.select("\nWould you like to complete\n\n\t'#{t[:text]}'\n\nor migrate it to today's entry?\n", %w(complete migrate))
             if action == 'complete'
-              t[:complete] = true
+              t = t.to_task.mark_as_complete
             end
           end
         end
@@ -58,7 +58,7 @@ module BulletJournal
     end
 
     def self.add_task(text)
-      file = YAML.load(today_file.read)
+      file = today_file_contents
 
       if file[:tasks] == {}
         file[:tasks] = [ Task.new(text: text).to_h ]
@@ -69,12 +69,24 @@ module BulletJournal
       today_file.write(YAML.dump(file))
     end
 
-    def self.complete_task(task_number)
-      file = YAML.load(today_file.read)
+    def self.delete_task(task_number)
+      file = today_file_contents
 
       unless file[:tasks].nil?
         unless file[:tasks][task_number].nil?
-          file[:tasks][task_number] = Task.new(file[:tasks][task_number].to_h).mark_as_complete
+          file[:tasks].delete_at(task_number)
+        end
+      end
+      
+      today_file.write(YAML.dump(file))
+    end
+
+    def self.complete_task(task_number)
+      file = today_file_contents
+
+      unless file[:tasks].nil?
+        unless file[:tasks][task_number].nil?
+          file[:tasks][task_number] = file[:tasks][task_number].to_task.mark_as_complete
           today_file.write(YAML.dump(file))
         end
       end
@@ -90,6 +102,10 @@ module BulletJournal
       Pathname("#{Dir.home}/.bullit/journal/#{year}/#{week}/#{weekday}.yaml")
     end
 
+    def self.today_file_contents
+      YAML.load(today_file.read)
+    end
+
     def self.yesterday_file
       t = Time.now
 
@@ -103,6 +119,10 @@ module BulletJournal
       else
         Pathname("#{Dir.home}/.bullit/journal/#{year}/#{week-1}/7.yaml")
       end
+    end
+
+    def self.yesterday_file_contents
+      YAML.load(yesterday_file.read)
     end
   end
 end
