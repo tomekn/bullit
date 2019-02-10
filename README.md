@@ -1,34 +1,53 @@
-# BulletJournal
+# Bullit
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bullit`. To experiment with that code, run `bin/console` for an interactive prompt.
+Bullet journals for those who don't get along with notebooks.
 
-TODO: Delete this and the text above, and describe your gem
+Currently this implements the 'daily spread' concept of a bullet journal.
+
+You can:
+    - Add tasks.
+    - Mark tasks as complete.
+    - Migrate uncompleted tasks from the previous day.
 
 ## Installation
 
 Add this line to your application's Gemfile:
-
-```ruby
-gem 'bullit'
+```bash
+$ gem install bullit
 ```
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bullit
 
 ## Usage
+```bash
+$ bullit generate today
+```
+On first run, this will instantiate a `~/.tasks` directory which will hold the YAML files used to store the daily logs.
 
+Throughout your day, add new tasks by running
+```bash
+$ bullit tasks add
+```
+
+View your tasks with
+```bash
+$ bullit tasks list
+```
+
+and mark your tasks as complete with
+```
+$ bullit tasks complete <task_number>
+```
+
+The next day, run
+```bash
+$ bullit generate today
+```
+To migrate uncompleted tasks from the day before. You will be able to flag tasks as complete in the prompt that will come up, which will stop them from being carried over.
+
+The generate command can be run over and over again without side effects, so you can place it in a startup script to run at the start of the day.
 TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 

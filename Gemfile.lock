@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bullit (0.1.0)
+    bullit (0.1.1)
       clamp
       tty-prompt
       tty-table
