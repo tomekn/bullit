@@ -5,25 +5,20 @@ Bullet journals for those who don't get along with notebooks.
 Currently this implements the 'daily spread' concept of a bullet journal.
 
 You can:
-    - Add tasks.
-    - Mark tasks as complete.
-    - Migrate uncompleted tasks from the previous day.
+  - Add tasks.
+  - Mark tasks as complete.
+  - Migrate uncompleted tasks from the previous day.
 
 ## Installation
 
-Add this line to your application's Gemfile:
 ```bash
 $ gem install bullit
 ```
-
-And then execute:
-
-
 ## Usage
 ```bash
 $ bullit generate today
 ```
-On first run, this will instantiate a `~/.tasks` directory which will hold the YAML files used to store the daily logs.
+On first run, this will instantiate a `~/.bullit` directory which will hold the YAML files used to store the daily logs.
 
 Throughout your day, add new tasks by running
 ```bash
