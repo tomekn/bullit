@@ -11,14 +11,9 @@ You can:
 
 ## Installation
 
-Add this line to your application's Gemfile:
 ```bash
 $ gem install bullit
 ```
-
-And then execute:
-
-
 ## Usage
 ```bash
 $ bullit generate today
