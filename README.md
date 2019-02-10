@@ -5,9 +5,9 @@ Bullet journals for those who don't get along with notebooks.
 Currently this implements the 'daily spread' concept of a bullet journal.
 
 You can:
-    - Add tasks.
-    - Mark tasks as complete.
-    - Migrate uncompleted tasks from the previous day.
+  - Add tasks.
+  - Mark tasks as complete.
+  - Migrate uncompleted tasks from the previous day.
 
 ## Installation
 
