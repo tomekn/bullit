@@ -47,7 +47,6 @@ $ bullit generate today
 To migrate uncompleted tasks from the day before. You will be able to flag tasks as complete in the prompt that will come up, which will stop them from being carried over.
 
 The generate command can be run over and over again without side effects, so you can place it in a startup script to run at the start of the day.
-TODO: Write usage instructions here
 
 ## Contributing
 

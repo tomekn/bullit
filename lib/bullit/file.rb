@@ -45,8 +45,6 @@ module BulletJournal
 
         yesterday_file.write(YAML.dump(file))
 
-        binding.pry
-        
         if file[:tasks] == {}
           return nil
         else
@@ -62,7 +60,7 @@ module BulletJournal
     def self.add_task(text)
       file = YAML.load(today_file.read)
 
-      if file[:tasks].nil?
+      if file[:tasks] == {}
         file[:tasks] = [ Task.new(text: text).to_h ]
       else
         file[:tasks] = today_tasks << Task.new(text: text).to_h
