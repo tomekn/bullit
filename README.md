@@ -18,7 +18,7 @@ $ gem install bullit
 ```bash
 $ bullit generate today
 ```
-On first run, this will instantiate a `~/.tasks` directory which will hold the YAML files used to store the daily logs.
+On first run, this will instantiate a `~/.bullit` directory which will hold the YAML files used to store the daily logs.
 
 Throughout your day, add new tasks by running
 ```bash
